@@ -69,9 +69,22 @@ export default function DataPage() {
           <Reveal><SectionHeader eyebrow="Projetos" title="Problemas reais transformados em estrutura." text="Projetos em saúde, pesquisa, automação, ciência aberta e IA aplicada — apresentados sem antecipar resultados que ainda não estejam documentados." /></Reveal>
           <div className="project-grid">
             {dataContent.projects.map((project, index) => (
-              <Reveal key={project.title} delay={(index % 3) * 70} className={`project-card ${project.pending ? 'is-pending' : ''}`}>
+              <Reveal key={project.title} delay={(index % 3) * 70} className={`project-card ${project.featured ? 'is-featured' : ''}`}>
                 <div className="project-card__meta"><span>{project.type}</span><span>{String(index + 1).padStart(2, '0')}</span></div>
                 <h3>{project.title}</h3><strong>{project.kicker}</strong><p>{project.text}</p>
+                {project.highlights ? (
+                  <ol className="project-method" aria-label="Etapas do case">
+                    {project.highlights.map((item, itemIndex) => (
+                      <li key={item}><span>{String(itemIndex + 1).padStart(2, '0')}</span><p>{item}</p></li>
+                    ))}
+                  </ol>
+                ) : null}
+                {project.deliverables ? (
+                  <div className="project-deliverables">
+                    <span>Entregáveis</span>
+                    <ul>{project.deliverables.map((item) => <li key={item}>{item}</li>)}</ul>
+                  </div>
+                ) : null}
                 <div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
               </Reveal>
             ))}
