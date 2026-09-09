@@ -66,53 +66,26 @@ export default function DataPage() {
         </section>
 
         <section id="projetos" className="content-section data-projects">
-          <Reveal><SectionHeader eyebrow="Projetos" title="Problemas reais transformados em estrutura." text="Projetos em saúde, pesquisa, automação, ciência aberta e IA aplicada — apresentados sem antecipar resultados que ainda não estejam documentados." /></Reveal>
+          <Reveal><SectionHeader eyebrow="Projetos" title="Problemas reais transformados em estrutura." text="Projetos em saúde, pesquisa, automação, ciência aberta e IA aplicada." /></Reveal>
           <div className="project-grid">
-            {dataContent.projects.map((project, index) => {
-              const projectClass = [
-                'project-card',
-                project.pending ? 'is-pending' : '',
-                project.featured ? 'project-card--featured' : '',
-              ].filter(Boolean).join(' ')
-
-              return (
-                <Reveal key={project.title} delay={(index % 3) * 70} className={projectClass}>
-                  <div className="project-card__meta"><span>{project.type}</span><span>{String(index + 1).padStart(2, '0')}</span></div>
-                  <h3>{project.title}</h3><strong>{project.kicker}</strong><p>{project.text}</p>
-
-                  {project.featured && project.highlights ? (
-                    <div className="project-card__details">
-                      <div>
-                        <p className="eyebrow">Fluxo metodológico</p>
-                        <ul>
-                          {project.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
-                        </ul>
-                      </div>
-                      <div>
-                        <p className="eyebrow">Entregáveis</p>
-                        <div className="project-card__deliverables">
-                          {project.deliverables.map((deliverable) => <span key={deliverable}>{deliverable}</span>)}
-                        </div>
-                      </div>
-                    </div>
-                  ) : null}
-
-                  <div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-                </Reveal>
-              )
-            })}
+            {dataContent.projects.map((project, index) => (
+              <Reveal key={project.title} delay={(index % 3) * 70} className="project-card">
+                <div className="project-card__meta"><span>{project.type}</span><span>{String(index + 1).padStart(2, '0')}</span></div>
+                <h3>{project.title}</h3><strong>{project.kicker}</strong><p>{project.text}</p>
+                <div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+              </Reveal>
+            ))}
           </div>
         </section>
 
         <section id="cases" className="content-section data-cases">
-          <Reveal><SectionHeader eyebrow="Cases" title="Projetos que começaram com um problema concreto." text="Os trechos abaixo são preservados como depoimentos de projetos anteriores. A autorização de reprodução pública deve ser confirmada antes do lançamento." /></Reveal>
+          <Reveal><SectionHeader eyebrow="Cases" title="Projetos que começaram com um problema concreto." text="Experiências de projetos em pesquisa, automação e organização de processos." /></Reveal>
           <div className="testimonial-grid">
             {dataContent.testimonials.map((item, index) => (
               <Reveal key={item.name} delay={index * 70} className="testimonial-card">
                 <span className="quote-mark" aria-hidden="true">“</span><blockquote>{item.quote}</blockquote>
                 <div className="testimonial-card__person"><strong>{item.name}</strong><span>{item.role}</span></div>
                 <p className="testimonial-card__project"><strong>Projeto realizado por Ricardo</strong>{item.project}</p>
-                <small>{item.note}</small>
               </Reveal>
             ))}
           </div>
@@ -138,7 +111,8 @@ export default function DataPage() {
             {dataContent.courses.map((course, index) => (
               <Reveal key={course.title} delay={index * 80} className="course-card">
                 <span className="eyebrow">{course.type}</span><h3>{course.title}</h3><strong>{course.subtitle}</strong><p>{course.text}</p>
-                {course.messageKey ? <ActionLink messageKey={course.messageKey} variant="secondary">Quero saber quando lançar</ActionLink> : null}
+                {course.href ? <ActionLink href={course.href} variant="secondary">{course.cta}</ActionLink> : null}
+                {course.messageKey ? <ActionLink messageKey={course.messageKey} variant="secondary">{course.cta}</ActionLink> : null}
               </Reveal>
             ))}
           </div>

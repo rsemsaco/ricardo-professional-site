@@ -97,25 +97,6 @@ export const dataContent = {
       text: 'Automação voltada a organizar informações e reduzir trabalho operacional em fluxos profissionais, sem substituir julgamento ou responsabilidade técnica.',
       tags: ['CIF', 'Saúde', 'Fluxos'],
     },
-    {
-      type: 'Case · Pesquisa científica',
-      title: 'Categorização de Respostas Abertas em Pesquisa',
-      kicker: 'Psicologia Histórico-Cultural · dados textuais',
-      text: 'Consultoria para estruturar uma metodologia de categorização de respostas abertas em pesquisa, conectando fundamentação científica, critérios documentados, anonimização e ferramentas tecnológicas de apoio à análise textual.',
-      highlights: [
-        'Revisão dos materiais do projeto e levantamento de referenciais científicos para categorização textual.',
-        'Definição e documentação de critérios de enquadramento para tornar a classificação transparente e metodologicamente defensável.',
-        'Construção e validação de categorias temáticas, com organização padronizada das respostas e dados anonimizados durante o processamento.',
-        'Descrição das categorias, análise de sua distribuição e mapeamento visual das relações entre os temas para apoiar interpretação posterior.',
-      ],
-      deliverables: [
-        'Documento metodológico em DOCX',
-        'Planilha XLSX com organização categórica',
-        'Mapa visual das categorias e relações',
-      ],
-      tags: ['Pesquisa', 'Dados textuais', 'Categorização', 'Metodologia', 'Psicologia'],
-      featured: true,
-    },
   ],
   testimonials: [
     {
@@ -123,21 +104,18 @@ export const dataContent = {
       role: 'Psicóloga · Núcleo Cantoar',
       quote: 'Ter um contato de psicólogo para psicólogo foi fundamental para me transmitir segurança no processo de automação do meu consultório. Foi além do suporte técnico: entenderam nosso negócio.',
       project: 'Automação de rotina, estruturação de presença digital e organização de processos para ampliar autonomia operacional.',
-      note: 'Trecho literal de depoimento de projeto anterior; autorização de reprodução pública deve ser confirmada antes do lançamento.',
     },
     {
       name: 'Andreia Manicardi',
       role: 'Pesquisadora · USP',
       quote: 'Hoje, meu trabalho foi otimizado de um jeito que eu jamais imaginei. Ganhei motivação pra continuar e posso focar onde realmente importa: nos participantes e na escrita.',
       project: 'Fluxo para organização de dados e redução do peso operacional da pesquisa.',
-      note: 'Trecho literal de depoimento de projeto anterior; autorização de reprodução pública deve ser confirmada antes do lançamento.',
     },
     {
       name: 'Renato Batista',
       role: 'Pesquisador · USP',
       quote: 'Com a captação inteligente, economizei semanas de trabalho. O que levaria meses foi resolvido em poucos dias.',
       project: 'Busca inteligente para acelerar a coleta de milhares de documentos específicos na Plataforma Lattes.',
-      note: 'Trecho literal de depoimento de projeto anterior; autorização de reprodução pública deve ser confirmada antes do lançamento.',
     },
   ],
   skills: [
@@ -169,6 +147,8 @@ export const dataContent = {
       title: 'Gestão em Psicologia Hospitalar — HCor',
       subtitle: 'Módulo de Inovação e Novas Tecnologias',
       text: 'Conteúdo voltado à interface entre prática hospitalar, inovação, processos e novas tecnologias aplicadas à Psicologia.',
+      href: 'https://ensino.hcor.com.br/gestao-psicologia-hospitalar/p?v=1788926022182',
+      cta: 'Quero me Inscrever',
     },
     {
       type: 'Curso em desenvolvimento',
@@ -176,6 +156,7 @@ export const dataContent = {
       subtitle: 'Inteligência Artificial Aplicada à Pesquisa Científica em Psicologia',
       text: 'Aplicações de IA em diferentes segmentos da pesquisa em Psicologia, incluindo busca, organização de literatura, tratamento de dados, automação, análise, síntese e limites éticos e metodológicos.',
       messageKey: 'course',
+      cta: 'Quero saber quando lançar',
     },
   ],
   speaking: {

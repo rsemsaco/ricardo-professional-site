@@ -1,0 +1,215 @@
+/* Final layout refinements requested after public review. */
+
+:root {
+  --section-space-desktop: clamp(4.75rem, 7.2vw, 6.75rem);
+  --section-space-mobile: 4rem;
+}
+
+/* Consistent vertical rhythm across both experiences. */
+.content-section {
+  padding-block: var(--section-space-desktop);
+}
+
+.section-header {
+  margin-bottom: clamp(2.25rem, 3.5vw, 3.25rem);
+}
+
+.experience-hero {
+  min-height: auto;
+  padding-block: clamp(4.5rem, 7vw, 6.5rem);
+}
+
+.psychology-statement {
+  margin-block: 1rem var(--section-space-desktop);
+}
+
+.data-positioning {
+  margin-block: 1rem 0;
+}
+
+.hospital-block {
+  padding-top: var(--section-space-desktop);
+}
+
+.education-band,
+.computing-band,
+.speaking-panel {
+  margin-top: clamp(2.25rem, 4vw, 3.5rem);
+}
+
+.psychology-final-cta,
+.data-final-cta {
+  margin-top: var(--section-space-desktop);
+  margin-bottom: clamp(3.5rem, 6vw, 5rem);
+}
+
+/* Portraits: show the approved files completely and avoid aggressive cropping. */
+.profile-portrait {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  aspect-ratio: auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.profile-portrait .profile-placeholder__visual {
+  position: relative;
+  inset: auto;
+  min-height: clamp(27rem, 44vw, 37rem);
+  overflow: hidden;
+}
+
+.profile-portrait__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+}
+
+.profile-placeholder--psychology .profile-placeholder__visual {
+  background: linear-gradient(145deg, #e9f2f8, #f4f0e8 58%, #e4d7c5);
+}
+
+.profile-placeholder--data .profile-placeholder__visual {
+  background: linear-gradient(145deg, #081b2b, #102a43 58%, #172a3a);
+}
+
+.profile-placeholder--psychology .profile-portrait__image,
+.profile-placeholder--data .profile-portrait__image {
+  object-position: center;
+}
+
+.profile-placeholder__caption {
+  position: relative;
+  inset: auto;
+  margin: 0 !important;
+  border: 0;
+  border-top: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 0 !important;
+  padding: 0.95rem 1.1rem !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .experience-hero__media:hover .profile-portrait__image {
+    transform: scale(1.018);
+  }
+}
+
+/* Data positioning block: prevent the final word from clipping/overlapping. */
+.data-positioning {
+  overflow: visible;
+  padding: clamp(2.4rem, 4.6vw, 4.25rem);
+}
+
+.data-positioning h2 {
+  max-width: 20ch;
+  margin-bottom: 1.35rem;
+  padding-bottom: 0.12em;
+  font-size: clamp(2.35rem, 4.4vw, 4.65rem);
+  line-height: 1.04;
+  letter-spacing: -0.048em;
+  overflow: visible;
+}
+
+.data-positioning > p {
+  max-width: 64ch;
+}
+
+.mini-flow {
+  flex-wrap: wrap;
+  row-gap: 0.9rem;
+}
+
+/* Five projects form a balanced 2 + 3 composition. */
+.project-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.project-card {
+  grid-column: span 3;
+  min-height: 22rem;
+}
+
+.project-card:nth-child(n + 3) {
+  grid-column: span 2;
+}
+
+.project-card h3 {
+  margin-top: 3.4rem;
+}
+
+/* Authorized testimonials no longer reserve space for verification notes. */
+.testimonial-card {
+  min-height: 28rem;
+}
+
+/* Course cards maintain equal visual weight after adding the HCor CTA. */
+.course-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.course-card .action-link {
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-card,
+  .project-card:nth-child(n + 3) {
+    grid-column: auto;
+  }
+
+  .project-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .content-section {
+    padding-block: var(--section-space-mobile);
+  }
+
+  .experience-hero {
+    padding-block: 3rem 4.25rem;
+  }
+
+  .psychology-statement {
+    margin-bottom: var(--section-space-mobile);
+  }
+
+  .hospital-block {
+    padding-top: var(--section-space-mobile);
+  }
+
+  .psychology-final-cta,
+  .data-final-cta {
+    margin-top: var(--section-space-mobile);
+  }
+
+  .profile-portrait .profile-placeholder__visual {
+    min-height: min(118vw, 35rem);
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card,
+  .project-card:nth-child(n + 3),
+  .project-card:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
+  .data-positioning h2 {
+    max-width: 100%;
+    font-size: clamp(2.4rem, 11.5vw, 3.75rem);
+    line-height: 1.06;
+  }
+}
