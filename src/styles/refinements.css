@@ -43,30 +43,33 @@
   margin-bottom: clamp(3.5rem, 6vw, 5rem);
 }
 
-/* Portraits: show the approved files completely and avoid aggressive cropping. */
+/* Portraits: use the manually uploaded JPGs in a controlled 4:5 hero crop. */
 .profile-portrait {
   display: grid;
   grid-template-rows: minmax(0, 1fr) auto;
-  aspect-ratio: auto;
+  width: min(100%, 34rem);
   min-height: 0;
+  margin-inline: auto;
   overflow: hidden;
 }
 
 .profile-portrait .profile-placeholder__visual {
   position: relative;
   inset: auto;
-  min-height: clamp(27rem, 44vw, 37rem);
+  aspect-ratio: 4 / 5;
+  min-height: 0;
   overflow: hidden;
 }
 
 .profile-portrait__image {
   position: absolute;
   inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center;
-  transform: none;
+  object-fit: cover;
+  transform: scale(1.001);
+  transform-origin: center;
 }
 
 .profile-placeholder--psychology .profile-placeholder__visual {
@@ -77,9 +80,12 @@
   background: linear-gradient(145deg, #081b2b, #102a43 58%, #172a3a);
 }
 
-.profile-placeholder--psychology .profile-portrait__image,
+.profile-placeholder--psychology .profile-portrait__image {
+  object-position: 50% 45%;
+}
+
 .profile-placeholder--data .profile-portrait__image {
-  object-position: center;
+  object-position: 50% 50%;
 }
 
 .profile-placeholder__caption {
@@ -94,7 +100,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .experience-hero__media:hover .profile-portrait__image {
-    transform: scale(1.018);
+    transform: scale(1.035);
   }
 }
 
@@ -193,8 +199,12 @@
     margin-top: var(--section-space-mobile);
   }
 
+  .profile-portrait {
+    width: min(100%, 30rem);
+  }
+
   .profile-portrait .profile-placeholder__visual {
-    min-height: min(118vw, 35rem);
+    aspect-ratio: 4 / 5;
   }
 
   .project-grid {

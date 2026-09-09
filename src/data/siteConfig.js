@@ -38,8 +38,8 @@ export const siteConfig = {
     },
   },
   media: {
-    psychologyProfile: 'images/psychology/ricardo-psychology.webp',
-    dataProfile: 'images/data/ricardo-data.webp',
+    psychologyProfile: 'ricardo-psychology.jpg',
+    dataProfile: 'ricardo-data.jpg',
   },
   deployment: {
     githubRepository: 'rsemsaco/ricardo-professional-site',
