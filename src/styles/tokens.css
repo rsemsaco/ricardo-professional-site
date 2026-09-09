@@ -1,0 +1,37 @@
+:root {
+  --color-blue-deep: #102a43;
+  --color-navy: #172a3a;
+  --color-blue-mid: #315f86;
+  --color-blue-light: #8fb9e1;
+  --color-off-white: #f4f0e8;
+  --color-beige: #d8c19f;
+  --color-black: #111111;
+  --color-white: #ffffff;
+
+  --font-sans: 'Manrope', 'Inter', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: 4.5rem;
+  --space-8: 6rem;
+
+  --radius-sm: 0.75rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 2rem;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 24px 80px rgb(23 42 58 / 12%);
+  --max-width: 1180px;
+  --header-height: 5.25rem;
+
+  font-family: var(--font-sans);
+  color: var(--color-navy);
+  background: var(--color-off-white);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}

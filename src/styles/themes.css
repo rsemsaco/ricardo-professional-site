@@ -1,0 +1,111 @@
+.theme-psychology {
+  --switch-active-text: var(--color-off-white);
+  color: var(--color-navy);
+  background: var(--color-off-white);
+}
+
+.theme-psychology .site-header {
+  background: rgb(244 240 232 / 78%);
+  border-bottom: 1px solid rgb(23 42 58 / 8%);
+}
+
+.experience-page--psychology {
+  background:
+    radial-gradient(circle at 76% 16%, rgb(143 185 225 / 46%), transparent 25rem),
+    linear-gradient(135deg, var(--color-off-white) 0%, #e9f2f8 54%, #eadfcf 100%);
+}
+
+.psychology-orb {
+  position: absolute;
+  border-radius: 50% 42% 56% 48%;
+  filter: blur(1px);
+  opacity: 0.52;
+  animation: organic-drift 16s ease-in-out infinite alternate;
+}
+
+.psychology-orb--one {
+  width: 28rem;
+  height: 22rem;
+  top: 18%;
+  right: -8rem;
+  background: rgb(216 193 159 / 45%);
+  transform: rotate(-12deg);
+}
+
+.psychology-orb--two {
+  width: 20rem;
+  height: 16rem;
+  bottom: 6%;
+  left: -7rem;
+  background: rgb(143 185 225 / 38%);
+  animation-delay: -5s;
+}
+
+.profile-placeholder--psychology {
+  background: linear-gradient(155deg, rgb(255 255 255 / 52%), rgb(143 185 225 / 23%));
+}
+
+.profile-placeholder--psychology .profile-placeholder__caption {
+  background: rgb(244 240 232 / 75%);
+}
+
+.theme-data {
+  --switch-active-text: var(--color-navy);
+  color: var(--color-off-white);
+  background: var(--color-navy);
+}
+
+.theme-data .site-header {
+  background: rgb(23 42 58 / 80%);
+  border-bottom: 1px solid rgb(244 240 232 / 9%);
+}
+
+.experience-page--data {
+  background:
+    radial-gradient(circle at 78% 12%, rgb(49 95 134 / 55%), transparent 27rem),
+    linear-gradient(150deg, #0b1f31 0%, var(--color-navy) 48%, #122f47 100%);
+}
+
+.data-field {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(143 185 225 / 6%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(143 185 225 / 6%) 1px, transparent 1px);
+  background-size: 58px 58px;
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 78%, transparent);
+}
+
+.data-node {
+  position: absolute;
+  width: 0.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-blue-light);
+  box-shadow:
+    0 0 0 10px rgb(143 185 225 / 7%),
+    0 0 42px rgb(143 185 225 / 34%);
+  animation: node-pulse 4.5s ease-in-out infinite;
+}
+
+.data-node--one { top: 28%; left: 8%; }
+.data-node--two { top: 70%; right: 12%; animation-delay: -1.5s; }
+.data-node--three { top: 18%; right: 34%; animation-delay: -3s; }
+
+.profile-placeholder--data {
+  background: linear-gradient(155deg, rgb(49 95 134 / 28%), rgb(8 26 40 / 66%));
+}
+
+.profile-placeholder--data .profile-placeholder__caption {
+  background: rgb(10 29 44 / 72%);
+}
+
+@keyframes organic-drift {
+  from { transform: translate3d(0, 0, 0) rotate(-10deg) scale(1); }
+  to { transform: translate3d(-22px, 28px, 0) rotate(4deg) scale(1.06); }
+}
+
+@keyframes node-pulse {
+  0%, 100% { transform: scale(0.85); opacity: 0.55; }
+  50% { transform: scale(1.15); opacity: 1; }
+}

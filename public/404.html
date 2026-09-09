@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecionando…</title>
+    <script>
+      ;(function redirectSpaRoute() {
+        var segmentsToKeep = window.location.hostname.endsWith('github.io') ? 1 : 0
+        var pathSegments = window.location.pathname.split('/').filter(Boolean)
+        var baseSegments = pathSegments.slice(0, segmentsToKeep)
+        var base = '/' + (baseSegments.length ? baseSegments.join('/') + '/' : '')
+        var route = window.location.pathname + window.location.search + window.location.hash
+        window.location.replace(base + '?route=' + encodeURIComponent(route))
+      })()
+    </script>
+  </head>
+  <body></body>
+</html>
