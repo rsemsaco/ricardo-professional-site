@@ -9,7 +9,16 @@ export default function PsychologyPage() {
   const bookingEnabled = siteConfig.psychology.bookingEnabled && Boolean(siteConfig.psychology.crp)
   const credential = siteConfig.psychology.crp
     ? `Ricardo Maggessi · Psicólogo · CRP ${siteConfig.psychology.crp}`
-    : 'CRP a inserir antes da publicação profissional'
+    : 'Psicologia USP · FAP · Saúde e contexto hospitalar'
+
+  const hero = bookingEnabled
+    ? psychologyContent.hero
+    : {
+        ...psychologyContent.hero,
+        title: 'Psicologia que acontece na relação.',
+        description:
+          'Minha trajetória em Psicologia conecta formação clínica supervisionada em FAP, experiência hospitalar, pesquisa e uma leitura contextual do comportamento humano.',
+      }
 
   return (
     <div className="experience-page experience-page--psychology">
@@ -23,16 +32,16 @@ export default function PsychologyPage() {
 
       <div className="page-container">
         <FoundationHero
-          {...psychologyContent.hero}
+          {...hero}
           mode="psychology"
-          photoLabel="Fotografia — Psicologia"
+          photoLabel="Ricardo · Psicologia"
           photoPath={siteConfig.media.psychologyProfile}
           photoId="psychology-profile"
           primaryAction={{
-            label: 'Agendar consulta',
+            label: bookingEnabled ? 'Agendar consulta' : 'Psicoterapia — em breve',
             messageKey: siteConfig.psychology.bookingMessageKey,
             disabled: !bookingEnabled,
-            ariaLabel: bookingEnabled ? 'Agendar consulta por WhatsApp' : 'Agendamento pendente de CRP',
+            ariaLabel: bookingEnabled ? 'Agendar consulta por WhatsApp' : 'Psicoterapia em breve',
           }}
           secondaryAction={psychologyContent.hero.secondaryCta}
           credential={credential}
@@ -68,36 +77,45 @@ export default function PsychologyPage() {
           </div>
         </section>
 
-        <section id="atendimentos" className="content-section psychology-care">
-          <Reveal>
-            <SectionHeader eyebrow={psychologyContent.demands.eyebrow} title={psychologyContent.demands.title} text={psychologyContent.demands.intro} />
-          </Reveal>
-          <div className="demand-cloud">
-            {psychologyContent.demands.items.map((item, index) => (
-              <Reveal key={item} delay={(index % 5) * 45} className="demand-chip"><span>{item}</span></Reveal>
-            ))}
-          </div>
-
-          <div className="modality-block">
+        {bookingEnabled ? (
+          <section id="atendimentos" className="content-section psychology-care">
             <Reveal>
-              <SectionHeader eyebrow={psychologyContent.modalities.eyebrow} title={psychologyContent.modalities.title} />
+              <SectionHeader eyebrow={psychologyContent.demands.eyebrow} title={psychologyContent.demands.title} text={psychologyContent.demands.intro} />
             </Reveal>
-            <div className="modality-grid">
-              {psychologyContent.modalities.items.map((item, index) => (
-                <Reveal key={item.title} delay={index * 70} className="modality-card">
-                  <span className="card-number">0{index + 1}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                </Reveal>
+            <div className="demand-cloud">
+              {psychologyContent.demands.items.map((item, index) => (
+                <Reveal key={item} delay={(index % 5) * 45} className="demand-chip"><span>{item}</span></Reveal>
               ))}
             </div>
-          </div>
-        </section>
+
+            <div className="modality-block">
+              <Reveal><SectionHeader eyebrow={psychologyContent.modalities.eyebrow} title={psychologyContent.modalities.title} /></Reveal>
+              <div className="modality-grid">
+                {psychologyContent.modalities.items.map((item, index) => (
+                  <Reveal key={item.title} delay={index * 70} className="modality-card">
+                    <span className="card-number">0{index + 1}</span><h3>{item.title}</h3><p>{item.text}</p>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : (
+          <section id="atendimentos" className="content-section psychology-prelaunch-section">
+            <Reveal className="psychology-prelaunch-panel">
+              <div>
+                <p className="eyebrow">Área clínica · pré-lançamento</p>
+                <h2>Psicoterapia — em breve.</h2>
+                <p>
+                  Esta versão pública apresenta minha trajetória, abordagem e experiência em Psicologia. Informações de atendimento, modalidades e agendamento serão disponibilizadas quando a área profissional estiver habilitada para publicação.
+                </p>
+              </div>
+              <div className="prelaunch-orbit" aria-hidden="true"><span /><span /><span /></div>
+            </Reveal>
+          </section>
+        )}
 
         <section id="experiencia" className="content-section psychology-experience">
-          <Reveal>
-            <SectionHeader eyebrow={psychologyContent.experience.eyebrow} title={psychologyContent.experience.title} />
-          </Reveal>
+          <Reveal><SectionHeader eyebrow={psychologyContent.experience.eyebrow} title={psychologyContent.experience.title} /></Reveal>
           <div className="metric-grid">
             {psychologyContent.experience.metrics.map((item, index) => (
               <Reveal key={item.value + item.label} delay={index * 70} className="metric-card">
@@ -107,9 +125,7 @@ export default function PsychologyPage() {
           </div>
 
           <div className="hospital-block">
-            <Reveal>
-              <SectionHeader eyebrow={psychologyContent.hospital.eyebrow} title={psychologyContent.hospital.title} text={psychologyContent.hospital.intro} />
-            </Reveal>
+            <Reveal><SectionHeader eyebrow={psychologyContent.hospital.eyebrow} title={psychologyContent.hospital.title} text={psychologyContent.hospital.intro} /></Reveal>
             <div className="hospital-path" aria-label="Áreas de experiência no HCor">
               {psychologyContent.hospital.areas.map((area, index) => (
                 <Reveal key={area.title} delay={(index % 3) * 60} className="hospital-stop">
@@ -129,9 +145,7 @@ export default function PsychologyPage() {
         </section>
 
         <section id="formacao" className="content-section psychology-formation">
-          <Reveal>
-            <SectionHeader eyebrow={psychologyContent.formation.eyebrow} title={psychologyContent.formation.title} text={psychologyContent.formation.intro} />
-          </Reveal>
+          <Reveal><SectionHeader eyebrow={psychologyContent.formation.eyebrow} title={psychologyContent.formation.title} text={psychologyContent.formation.intro} /></Reveal>
           <div className="formation-grid">
             {psychologyContent.formation.cards.map((item, index) => (
               <Reveal key={item.title} delay={index * 70} className="formation-card">
@@ -142,9 +156,7 @@ export default function PsychologyPage() {
         </section>
 
         <section id="pesquisa" className="content-section psychology-research">
-          <Reveal>
-            <SectionHeader eyebrow={psychologyContent.research.eyebrow} title={psychologyContent.research.title} />
-          </Reveal>
+          <Reveal><SectionHeader eyebrow={psychologyContent.research.eyebrow} title={psychologyContent.research.title} /></Reveal>
           <div className="research-grid">
             {psychologyContent.research.items.map((item, index) => (
               <Reveal key={item.title} delay={(index % 2) * 70} className="research-card">
@@ -160,16 +172,17 @@ export default function PsychologyPage() {
 
         <section className="psychology-final-cta">
           <Reveal>
-            <p className="eyebrow">{psychologyContent.finalCta.eyebrow}</p>
-            <h2>{psychologyContent.finalCta.title}</h2>
-            <p>{psychologyContent.finalCta.text}</p>
-            <ActionLink messageKey={siteConfig.psychology.bookingMessageKey} disabled={!bookingEnabled}>Agendar consulta</ActionLink>
-            {!bookingEnabled ? <small>{siteConfig.psychology.pendingNotice}</small> : null}
+            <p className="eyebrow">{bookingEnabled ? psychologyContent.finalCta.eyebrow : 'Próxima etapa'}</p>
+            <h2>{bookingEnabled ? psychologyContent.finalCta.title : 'Psicoterapia — em breve.'}</h2>
+            <p>{bookingEnabled ? psychologyContent.finalCta.text : 'A área de atendimento será ativada nesta mesma experiência quando as informações profissionais forem atualizadas.'}</p>
+            {bookingEnabled ? <ActionLink messageKey={siteConfig.psychology.bookingMessageKey}>Agendar consulta</ActionLink> : null}
           </Reveal>
         </section>
       </div>
 
-      <p className="clinical-note">Este site não substitui serviços de urgência ou emergência. Informações clínicas são apresentadas de forma geral e não constituem diagnóstico individual.</p>
+      <p className="clinical-note">
+        Conteúdo profissional e informativo. O atendimento psicológico não está habilitado nesta versão pública de pré-lançamento.
+      </p>
     </div>
   )
 }

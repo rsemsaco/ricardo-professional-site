@@ -1,0 +1,9 @@
+{
+  "name": "Ricardo Maggessi — Psicologia, Dados & Tecnologia",
+  "short_name": "Ricardo Maggessi",
+  "start_url": "./psicologia",
+  "display": "standalone",
+  "background_color": "#F4F0E8",
+  "theme_color": "#172A3A",
+  "icons": []
+}

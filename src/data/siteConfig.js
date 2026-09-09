@@ -8,7 +8,8 @@ export const siteConfig = {
     crp: null,
     bookingEnabled: false,
     bookingMessageKey: 'psychologyBooking',
-    pendingNotice: 'Agendamento será ativado após inclusão e validação do CRP antes da publicação.',
+    pendingNotice:
+      'A área de atendimento profissional está em pré-lançamento e será ativada após atualização e validação das informações profissionais.',
   },
   contact: {
     whatsapp: '5511914067030',
@@ -43,6 +44,7 @@ export const siteConfig = {
   deployment: {
     githubRepository: 'rsemsaco/ricardo-professional-site',
     githubPagesBasePath: '/ricardo-professional-site/',
+    githubPagesUrl: 'https://rsemsaco.github.io/ricardo-professional-site/',
   },
 }
 

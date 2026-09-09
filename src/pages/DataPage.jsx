@@ -19,7 +19,7 @@ export default function DataPage() {
         <FoundationHero
           {...dataContent.hero}
           mode="data"
-          photoLabel="Fotografia — Dados"
+          photoLabel="Ricardo · Dados"
           photoPath={siteConfig.media.dataProfile}
           photoId="data-profile"
           primaryAction={dataContent.hero.primaryCta}
@@ -68,26 +68,39 @@ export default function DataPage() {
         <section id="projetos" className="content-section data-projects">
           <Reveal><SectionHeader eyebrow="Projetos" title="Problemas reais transformados em estrutura." text="Projetos em saúde, pesquisa, automação, ciência aberta e IA aplicada — apresentados sem antecipar resultados que ainda não estejam documentados." /></Reveal>
           <div className="project-grid">
-            {dataContent.projects.map((project, index) => (
-              <Reveal key={project.title} delay={(index % 3) * 70} className={`project-card ${project.featured ? 'is-featured' : ''}`}>
-                <div className="project-card__meta"><span>{project.type}</span><span>{String(index + 1).padStart(2, '0')}</span></div>
-                <h3>{project.title}</h3><strong>{project.kicker}</strong><p>{project.text}</p>
-                {project.highlights ? (
-                  <ol className="project-method" aria-label="Etapas do case">
-                    {project.highlights.map((item, itemIndex) => (
-                      <li key={item}><span>{String(itemIndex + 1).padStart(2, '0')}</span><p>{item}</p></li>
-                    ))}
-                  </ol>
-                ) : null}
-                {project.deliverables ? (
-                  <div className="project-deliverables">
-                    <span>Entregáveis</span>
-                    <ul>{project.deliverables.map((item) => <li key={item}>{item}</li>)}</ul>
-                  </div>
-                ) : null}
-                <div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-              </Reveal>
-            ))}
+            {dataContent.projects.map((project, index) => {
+              const projectClass = [
+                'project-card',
+                project.pending ? 'is-pending' : '',
+                project.featured ? 'project-card--featured' : '',
+              ].filter(Boolean).join(' ')
+
+              return (
+                <Reveal key={project.title} delay={(index % 3) * 70} className={projectClass}>
+                  <div className="project-card__meta"><span>{project.type}</span><span>{String(index + 1).padStart(2, '0')}</span></div>
+                  <h3>{project.title}</h3><strong>{project.kicker}</strong><p>{project.text}</p>
+
+                  {project.featured && project.highlights ? (
+                    <div className="project-card__details">
+                      <div>
+                        <p className="eyebrow">Fluxo metodológico</p>
+                        <ul>
+                          {project.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="eyebrow">Entregáveis</p>
+                        <div className="project-card__deliverables">
+                          {project.deliverables.map((deliverable) => <span key={deliverable}>{deliverable}</span>)}
+                        </div>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  <div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                </Reveal>
+              )
+            })}
           </div>
         </section>
 
