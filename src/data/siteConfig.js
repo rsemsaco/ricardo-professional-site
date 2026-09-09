@@ -43,8 +43,10 @@ export const siteConfig = {
   },
   deployment: {
     githubRepository: 'rsemsaco/ricardo-professional-site',
-    githubPagesBasePath: '/ricardo-professional-site/',
-    githubPagesUrl: 'https://rsemsaco.github.io/ricardo-professional-site/',
+    githubPagesBasePath: '/',
+    githubPagesUrl: 'https://www.ricardomaggessi.com/',
+    customDomain: 'www.ricardomaggessi.com',
+    apexDomain: 'ricardomaggessi.com',
   },
 }
 
