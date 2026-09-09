@@ -1,3 +1,5 @@
+import ActionLink from '../components/content/ActionLink.jsx'
+import Reveal from '../components/content/Reveal.jsx'
 import ProfilePlaceholder from '../components/media/ProfilePlaceholder.jsx'
 
 export default function FoundationHero({
@@ -7,21 +9,48 @@ export default function FoundationHero({
   mode,
   photoLabel,
   photoPath,
-  statusLabel,
+  photoId,
+  primaryAction,
+  secondaryAction,
+  credential,
+  notice,
 }) {
   return (
-    <section className="foundation-hero" aria-labelledby={`${mode}-hero-title`}>
-      <div className="foundation-hero__content">
+    <section className={`experience-hero experience-hero--${mode}`} aria-labelledby={`${mode}-hero-title`}>
+      <Reveal className="experience-hero__content">
         <p className="eyebrow">{eyebrow}</p>
         <h1 id={`${mode}-hero-title`}>{title}</h1>
-        <p className="foundation-hero__description">{description}</p>
-        <div className="foundation-hero__status" role="status">
-          <span className="status-dot" aria-hidden="true" />
-          {statusLabel}
-        </div>
-      </div>
+        <p className="experience-hero__description">{description}</p>
 
-      <ProfilePlaceholder mode={mode} label={photoLabel} path={photoPath} />
+        <div className="experience-hero__actions">
+          {primaryAction ? (
+            <ActionLink
+              href={primaryAction.href}
+              messageKey={primaryAction.messageKey}
+              disabled={primaryAction.disabled}
+              ariaLabel={primaryAction.ariaLabel}
+            >
+              {primaryAction.label}
+            </ActionLink>
+          ) : null}
+          {secondaryAction ? (
+            <ActionLink href={secondaryAction.href} variant="secondary">
+              {secondaryAction.label}
+            </ActionLink>
+          ) : null}
+        </div>
+
+        {credential || notice ? (
+          <div className="experience-hero__meta">
+            {credential ? <span>{credential}</span> : null}
+            {notice ? <span>{notice}</span> : null}
+          </div>
+        ) : null}
+      </Reveal>
+
+      <Reveal className="experience-hero__media" delay={120}>
+        <ProfilePlaceholder mode={mode} label={photoLabel} path={photoPath} id={photoId} />
+      </Reveal>
     </section>
   )
 }

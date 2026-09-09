@@ -1,13 +1,16 @@
-export default function ProfilePlaceholder({ mode, label, path }) {
+export default function ProfilePlaceholder({ mode, label, path, id }) {
   return (
-    <figure className={`profile-placeholder profile-placeholder--${mode}`}>
+    <figure id={id} className={`profile-placeholder profile-placeholder--${mode}`}>
       <div className="profile-placeholder__visual" aria-hidden="true">
-        <span className="profile-placeholder__ring" />
+        <span className="profile-placeholder__halo" />
+        <span className="profile-placeholder__line" />
         <span className="profile-placeholder__mark">RM</span>
       </div>
       <figcaption className="profile-placeholder__caption">
-        <strong>{label}</strong>
-        <span>Imagem reservada para a etapa de fotografia.</span>
+        <div>
+          <strong>{label}</strong>
+          <span>Espaço reservado para a fotografia final.</span>
+        </div>
         <code>{path}</code>
       </figcaption>
     </figure>
