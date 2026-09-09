@@ -5,6 +5,9 @@ import './styles/tokens.css'
 import './styles/global.css'
 import './styles/layout.css'
 import './styles/themes.css'
+import './styles/experience.css'
+import './styles/psychology.css'
+import './styles/data.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

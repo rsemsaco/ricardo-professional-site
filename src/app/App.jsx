@@ -3,15 +3,26 @@ import ModeTransition from '../animations/ModeTransition.jsx'
 import SiteShell from '../components/layout/SiteShell.jsx'
 import DataPage from '../pages/DataPage.jsx'
 import PsychologyPage from '../pages/PsychologyPage.jsx'
-import {
-  getModeFromPath,
-  getModePath,
-  isKnownModePath,
-  MODES,
-} from './router.js'
+import { getModeFromPath, getModePath, isKnownModePath, MODES } from './router.js'
 
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
+function updateDocumentMeta(mode) {
+  const isPsychology = mode === MODES.psychology
+  document.title = isPsychology
+    ? 'Ricardo Maggessi | Psicologia e FAP'
+    : 'Ricardo Maggessi | Análise de Dados & Negócios'
+
+  const description = isPsychology
+    ? 'Ricardo Maggessi — Psicologia, FAP, experiência clínica e hospitalar, pesquisa e formação em saúde.'
+    : 'Ricardo Maggessi — análise de dados e negócios, pesquisa, automações, saúde, tecnologia e IA aplicada.'
+
+  document.querySelector('meta[name="description"]')?.setAttribute('content', description)
+  document
+    .querySelector('meta[name="theme-color"]')
+    ?.setAttribute('content', isPsychology ? '#F4F0E8' : '#172A3A')
 }
 
 export default function App() {
@@ -36,18 +47,15 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.dataset.mode = mode
-    document.title =
-      mode === MODES.psychology
-        ? 'Ricardo Maggessi | Psicologia'
-        : 'Ricardo Maggessi | Dados & Negócios'
+    updateDocumentMeta(mode)
   }, [mode])
 
   const navigateToMode = (nextMode) => {
     if (nextMode === mode || transition.active) return
 
     const reduceMotion = prefersReducedMotion()
-    const midpoint = reduceMotion ? 0 : 320
-    const finish = reduceMotion ? 0 : 760
+    const midpoint = reduceMotion ? 0 : 340
+    const finish = reduceMotion ? 0 : 820
 
     setTransition({ active: true, target: nextMode })
 
@@ -55,13 +63,12 @@ export default function App() {
       window.setTimeout(() => {
         window.history.pushState({}, '', getModePath(nextMode))
         setMode(nextMode)
+        window.scrollTo({ top: 0, behavior: 'auto' })
       }, midpoint),
     )
 
     timersRef.current.push(
-      window.setTimeout(() => {
-        setTransition({ active: false, target: nextMode })
-      }, finish),
+      window.setTimeout(() => setTransition({ active: false, target: nextMode }), finish),
     )
   }
 

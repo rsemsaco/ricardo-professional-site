@@ -5,48 +5,70 @@ Site profissional de Ricardo Maggessi com duas experiências integradas:
 - `/psicologia`
 - `/dados`
 
-A arquitetura visual segue a **Referência do Site**: uma mesma identidade profissional com transição entre uma linguagem orgânica, humana e clínica e outra estruturada, técnica e orientada a dados.
+A arquitetura segue a **Referência do Site**: uma mesma marca pessoal que transita entre uma linguagem humana, clínica e orgânica e outra estruturada, tecnológica e orientada a dados.
 
 ## Etapa atual
 
-**Etapa 1 — Fundação técnica e visual.**
+**Etapa 2 — Experiências completas de Psicologia e Dados.**
 
-O conteúdo completo das duas experiências será implementado apenas na Etapa 2.
+A página de Psicologia contém a arquitetura completa de abordagem FAP, demandas clínicas, modalidades, experiência, HCor, formação, pesquisa, educação e CTA final. O agendamento fica tecnicamente bloqueado enquanto o CRP não estiver configurado em `siteConfig.js`.
+
+A página de Dados contém posicionamento, serviços, saúde + dados, cargos, projetos, cases, hard skills, formação complementar, cursos, palestras e CTAs de WhatsApp centralizados.
 
 ## Stack
 
 - React 19
 - Vite 8
-- CSS nativo para tokens, temas, responsividade e animações
+- CSS nativo
+- IntersectionObserver para animações de entrada
+- History API para rotas
 - Sem backend
+- Sem analytics/tracking
 - Sem armazenamento de dados pessoais
-- Sem bibliotecas de animação adicionais
+- Sem bibliotecas extras de animação ou roteamento
 
-## Estrutura
+## Organização principal
 
 ```text
 src/
 ├── animations/
 ├── app/
 ├── components/
+│   ├── content/
 │   ├── layout/
 │   ├── media/
 │   └── navigation/
 ├── data/
+│   ├── dataContent.js
+│   ├── navigation.js
+│   ├── psychologyContent.js
+│   └── siteConfig.js
 ├── pages/
 ├── sections/
 └── styles/
-
-public/
-├── 404.html
-└── images/
-    ├── psychology/
-    └── data/
 ```
 
-## Desenvolvimento local
+## Dados configuráveis
 
-Requer Node.js 22.12 ou superior.
+`src/data/siteConfig.js` centraliza:
+
+- CRP e ativação do agendamento de Psicologia;
+- número do WhatsApp;
+- mensagens pré-preenchidas por serviço;
+- links sociais;
+- caminhos das fotografias;
+- configuração-base de deploy.
+
+## Fotografias futuras
+
+Os placeholders estão preparados para:
+
+- `public/images/psychology/ricardo-psychology.webp`
+- `public/images/data/ricardo-data.webp`
+
+## Desenvolvimento
+
+Node.js 22.12+.
 
 ```bash
 npm install
@@ -59,17 +81,8 @@ npm run dev
 npm run build
 ```
 
-O GitHub Actions também executa o build em pushes para `main`, branches `foundation/**` e pull requests.
+O GitHub Actions executa o build em branches de trabalho, PRs e `main`.
 
-## GitHub Pages
+## Publicação
 
-A base do Vite utiliza caminhos relativos e o projeto inclui um fallback `404.html` para preservar as rotas `/psicologia` e `/dados` em hospedagem estática. A ativação do GitHub Pages e a configuração final de deploy ficam deliberadamente para a etapa de publicação.
-
-## Fotografias futuras
-
-Os espaços já estão preparados para:
-
-- `public/images/psychology/ricardo-psychology.webp`
-- `public/images/data/ricardo-data.webp`
-
-As fotografias serão produzidas e tratadas em uma etapa visual posterior.
+O site ainda **não está publicado**. Configuração final de GitHub Pages, domínio, SEO de lançamento, fotografias e auditoria visual final ficam para a Etapa 3.
