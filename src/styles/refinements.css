@@ -3,6 +3,7 @@
 :root {
   --section-space-desktop: clamp(4.75rem, 7.2vw, 6.75rem);
   --section-space-mobile: 4rem;
+  --portrait-mechanical-shift: 1.25cm;
 }
 
 /* Consistent vertical rhythm across both experiences. */
@@ -61,14 +62,23 @@
   overflow: hidden;
 }
 
+/*
+ * Same mechanical horizontal displacement for both portraits.
+ * The bitmap is widened by the exact same amount it is translated so the
+ * right edge remains fully covered and no empty strip can appear.
+ */
 .profile-portrait__image {
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: auto;
   display: block;
-  width: 100%;
+  width: calc(100% + var(--portrait-mechanical-shift));
   height: 100%;
   object-fit: cover;
-  transform: scale(1.001);
+  object-position: 50% 50%;
+  transform: translateX(-1.25cm) scale(1.001);
   transform-origin: center;
 }
 
@@ -81,11 +91,11 @@
 }
 
 .profile-placeholder--psychology .profile-portrait__image {
-  object-position: 60% 45%;
+  object-position: 50% 45%;
 }
 
 .profile-placeholder--data .profile-portrait__image {
-  object-position: 68% 50%;
+  object-position: 50% 50%;
 }
 
 .profile-placeholder__caption {
@@ -100,7 +110,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .experience-hero__media:hover .profile-portrait__image {
-    transform: scale(1.035);
+    transform: translateX(-1.25cm) scale(1.035);
   }
 }
 
