@@ -40,7 +40,7 @@ function storeConsent(value) {
   try {
     window.localStorage.setItem(CONSENT_KEY, value)
   } catch {
-    // Analytics continues with the in-memory consent state if storage is unavailable.
+    // Analytics continues with the in-memory state if storage is unavailable.
   }
 }
 
@@ -52,30 +52,14 @@ function debugModeEnabled() {
   return new URLSearchParams(window.location.search).get('ga_debug') === '1'
 }
 
-export function getAnalyticsConsent() {
-  if (typeof window === 'undefined') return null
-  const value = readStoredConsent()
-  return value === 'granted' || value === 'denied' ? value : null
-}
-
-export function initializeAnalytics() {
-  if (typeof window === 'undefined' || window.__rmGa4Initialized) return
+function loadGa4() {
+  if (typeof window === 'undefined' || window.__rmGa4Loaded) return
 
   const measurementId = siteConfig.analytics?.ga4MeasurementId
   if (!measurementId) return
 
-  window.__rmGa4Initialized = true
+  window.__rmGa4Loaded = true
   ensureGtag()
-
-  const storedConsent = getAnalyticsConsent()
-  window.gtag('consent', 'default', {
-    analytics_storage: storedConsent === 'granted' ? 'granted' : 'denied',
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    wait_for_update: 500,
-  })
-
   window.gtag('js', new Date())
   window.gtag('config', measurementId, {
     allow_google_signals: false,
@@ -88,6 +72,31 @@ export function initializeAnalytics() {
   script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`
   script.dataset.rmAnalytics = 'ga4'
   document.head.appendChild(script)
+}
+
+export function getAnalyticsConsent() {
+  if (typeof window === 'undefined') return null
+  const value = readStoredConsent()
+  return value === 'granted' || value === 'denied' ? value : null
+}
+
+export function initializeAnalytics() {
+  if (typeof window === 'undefined' || window.__rmGa4Initialized) return
+
+  window.__rmGa4Initialized = true
+  ensureGtag()
+
+  window.gtag('consent', 'default', {
+    analytics_storage: 'denied',
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+  })
+
+  if (getAnalyticsConsent() === 'granted') {
+    window.gtag('consent', 'update', { analytics_storage: 'granted' })
+    loadGa4()
+  }
 }
 
 export function setAnalyticsConsent(value) {
@@ -103,6 +112,8 @@ export function setAnalyticsConsent(value) {
     ad_user_data: 'denied',
     ad_personalization: 'denied',
   })
+
+  if (consent === 'granted') loadGa4()
 }
 
 export function openAnalyticsPreferences() {
@@ -110,9 +121,7 @@ export function openAnalyticsPreferences() {
   window.dispatchEvent(new CustomEvent('rm:analytics-preferences'))
 }
 
-export function getDefaultActionAnalytics(messageKey) {
-  if (!messageKey) return null
-
+export function getDefaultActionAnalytics(messageKey, href) {
   if (messageKey === 'course') {
     return {
       eventName: ANALYTICS_EVENTS.courseInterest,
@@ -120,6 +129,17 @@ export function getDefaultActionAnalytics(messageKey) {
         course_name: 'PsIcologiA',
         course_type: 'course_in_development',
         destination: 'whatsapp_interest',
+      },
+    }
+  }
+
+  if (href?.includes('ensino.hcor.com.br/gestao-psicologia-hospitalar')) {
+    return {
+      eventName: ANALYTICS_EVENTS.courseInterest,
+      params: {
+        course_name: 'Gestao em Psicologia Hospitalar - HCor',
+        course_type: 'external_enrollment',
+        destination: 'hcor_course_page',
       },
     }
   }
@@ -134,7 +154,7 @@ export function getDefaultActionAnalytics(messageKey) {
 }
 
 export function trackEvent(eventName, params = {}) {
-  if (typeof window === 'undefined' || !eventName) return
+  if (typeof window === 'undefined' || !eventName || getAnalyticsConsent() !== 'granted') return
   ensureGtag()
 
   const eventParams = {
