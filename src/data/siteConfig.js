@@ -4,6 +4,9 @@ export const siteConfig = {
     descriptor: 'Psicologia · Dados · Tecnologia',
     signature: 'Entre o humano e o tecnológico.',
   },
+  analytics: {
+    ga4MeasurementId: 'G-3DVHYBNR8C',
+  },
   psychology: {
     crp: null,
     bookingEnabled: false,

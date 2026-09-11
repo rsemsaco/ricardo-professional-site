@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './app/App.jsx'
+import { initializeAnalytics } from './analytics/ga4.js'
 import './styles/tokens.css'
 import './styles/global.css'
 import './styles/layout.css'
@@ -10,6 +11,9 @@ import './styles/psychology.css'
 import './styles/data.css'
 import './styles/premium.css'
 import './styles/refinements.css'
+import './styles/analytics.css'
+
+initializeAnalytics()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

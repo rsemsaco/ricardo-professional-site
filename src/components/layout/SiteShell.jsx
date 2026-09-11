@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
+import AnalyticsConsent from '../analytics/AnalyticsConsent.jsx'
 import ModeSwitch from '../navigation/ModeSwitch.jsx'
+import { ANALYTICS_EVENTS, trackEvent } from '../../analytics/ga4.js'
 import { siteConfig } from '../../data/siteConfig.js'
 import { navigationByMode } from '../../data/navigation.js'
 
@@ -86,7 +88,7 @@ export default function SiteShell({ children, mode, onModeChange }) {
     }
   }, [])
 
-  const renderNavigation = (className, label) => (
+  const renderNavigation = (className, label, navigationType) => (
     <nav className={className} aria-label={label}>
       {navigation.map((item) => (
         <a
@@ -94,11 +96,30 @@ export default function SiteShell({ children, mode, onModeChange }) {
           href={item.href}
           className={activeHref === item.href ? 'is-active' : undefined}
           aria-current={activeHref === item.href ? 'location' : undefined}
+          onClick={() => trackEvent(ANALYTICS_EVENTS.sectionNavClick, {
+            section_id: item.href.replace('#', ''),
+            section_label: item.label,
+            navigation_type: navigationType,
+          })}
         >
           {item.label}
         </a>
       ))}
     </nav>
+  )
+
+  const socialLink = (network, href, label) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      onClick={() => trackEvent(ANALYTICS_EVENTS.socialClick, {
+        social_network: network,
+        link_location: 'footer',
+      })}
+    >
+      {label}
+    </a>
   )
 
   return (
@@ -125,6 +146,7 @@ export default function SiteShell({ children, mode, onModeChange }) {
           {renderNavigation(
             'section-nav',
             `Navegação da experiência ${mode === 'psychology' ? 'Psicologia' : 'Dados'}`,
+            'desktop',
           )}
 
           <ModeSwitch mode={mode} onModeChange={onModeChange} />
@@ -134,6 +156,7 @@ export default function SiteShell({ children, mode, onModeChange }) {
           {renderNavigation(
             'section-nav-mobile',
             `Seções da experiência ${mode === 'psychology' ? 'Psicologia' : 'Dados'}`,
+            'mobile',
           )}
         </div>
       </header>
@@ -147,12 +170,14 @@ export default function SiteShell({ children, mode, onModeChange }) {
             <span>{siteConfig.brand.signature}</span>
           </div>
           <nav className="footer-links" aria-label="Perfis profissionais">
-            <a href={siteConfig.contact.social.instagram} target="_blank" rel="noreferrer">Instagram</a>
-            <a href={siteConfig.contact.social.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href={siteConfig.contact.social.lattes} target="_blank" rel="noreferrer">Lattes</a>
+            {socialLink('instagram', siteConfig.contact.social.instagram, 'Instagram')}
+            {socialLink('linkedin', siteConfig.contact.social.linkedin, 'LinkedIn')}
+            {socialLink('lattes', siteConfig.contact.social.lattes, 'Lattes')}
           </nav>
         </div>
       </footer>
+
+      <AnalyticsConsent />
     </div>
   )
 }
