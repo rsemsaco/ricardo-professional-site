@@ -1,3 +1,4 @@
+import { ANALYTICS_EVENTS, trackEvent } from '../../analytics/ga4.js'
 import { getModePath, MODES } from '../../app/router.js'
 
 const options = [
@@ -18,6 +19,14 @@ export default function ModeSwitch({ mode, onModeChange }) {
     }
 
     event.preventDefault()
+
+    if (nextMode !== mode) {
+      trackEvent(ANALYTICS_EVENTS.modeSwitch, {
+        mode_from: mode,
+        mode_to: nextMode,
+      })
+    }
+
     onModeChange(nextMode)
   }
 
