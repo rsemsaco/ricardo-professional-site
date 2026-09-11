@@ -15,7 +15,7 @@ export default function ActionLink({
   const className = `action-link action-link--${variant}`
 
   const handleClick = () => {
-    const inferred = getDefaultActionAnalytics(messageKey)
+    const inferred = getDefaultActionAnalytics(messageKey, href)
     const event = analytics || inferred
 
     if (event?.eventName) {
