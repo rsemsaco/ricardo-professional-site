@@ -6,6 +6,14 @@
   --portrait-fill-scale: 1.42;
 }
 
+/* Internal sections render immediately; hero keeps the entrance reveal. */
+.reveal--static {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+
 /* Consistent vertical rhythm across both experiences. */
 .content-section {
   padding-block: var(--section-space-desktop);
@@ -44,7 +52,7 @@
   margin-bottom: clamp(3.5rem, 6vw, 5rem);
 }
 
-/* Portraits: controlled 4:5 crop with intentional zoom to fill the card. */
+/* Portraits: controlled crop with intentional zoom. */
 .profile-portrait {
   display: grid;
   grid-template-rows: minmax(0, 1fr) auto;
@@ -84,7 +92,9 @@
   background: linear-gradient(145deg, #081b2b, #102a43 58%, #172a3a);
 }
 
+/* Strong leftward crop for Psychology; Data remains centered. */
 .profile-placeholder--psychology .profile-portrait__image {
+  left: 40%;
   object-position: 50% 46%;
 }
 
@@ -108,7 +118,7 @@
   }
 }
 
-/* Data positioning block: prevent the final word from clipping/overlapping. */
+/* Data positioning block: prevent clipping and keep readable measure. */
 .data-positioning {
   overflow: visible;
   padding: clamp(2.4rem, 4.6vw, 4.25rem);
@@ -151,12 +161,10 @@
   margin-top: 3.4rem;
 }
 
-/* Authorized testimonials no longer reserve space for verification notes. */
 .testimonial-card {
   min-height: 28rem;
 }
 
-/* Course cards maintain equal visual weight after adding the HCor CTA. */
 .course-card {
   display: flex;
   flex-direction: column;
@@ -166,7 +174,28 @@
   margin-top: auto;
 }
 
-@media (max-width: 900px) {
+/* Tablet: reduce crowding and avoid oversized fixed card heights. */
+@media (max-width: 1050px) {
+  :root {
+    --section-space-desktop: clamp(4.25rem, 7vw, 5.5rem);
+  }
+
+  .page-container,
+  .site-header__inner,
+  .site-footer__inner {
+    width: min(calc(100% - 2rem), var(--max-width));
+  }
+
+  .service-grid,
+  .testimonial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .service-card,
+  .testimonial-card {
+    min-height: 24rem;
+  }
+
   .project-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -181,9 +210,18 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 760px) {
   :root {
-    --portrait-fill-scale: 1.36;
+    --section-space-mobile: 3.6rem;
+    --portrait-fill-scale: 1.34;
+  }
+
+  .page-container,
+  .site-header__inner,
+  .site-footer__inner,
+  .mobile-nav-shell,
+  .clinical-note {
+    width: min(calc(100% - 1.25rem), var(--max-width));
   }
 
   .content-section {
@@ -191,11 +229,35 @@
   }
 
   .experience-hero {
-    padding-block: 3rem 4.25rem;
+    gap: 1.75rem;
+    padding-block: 2.75rem 3.8rem;
+  }
+
+  .experience-hero h1 {
+    font-size: clamp(2.8rem, 12vw, 4.35rem);
+    line-height: 0.96;
+  }
+
+  .experience-hero__description {
+    font-size: clamp(1rem, 4.2vw, 1.15rem);
+  }
+
+  .section-header h2,
+  .data-positioning h2,
+  .psychology-final-cta h2,
+  .data-final-cta h2,
+  .speaking-panel h2 {
+    font-size: clamp(2.25rem, 10vw, 3.6rem);
+    line-height: 1;
   }
 
   .psychology-statement {
     margin-bottom: var(--section-space-mobile);
+    padding: 2rem 1.35rem;
+  }
+
+  .psychology-statement p {
+    font-size: clamp(2rem, 10vw, 3.4rem);
   }
 
   .hospital-block {
@@ -205,29 +267,92 @@
   .psychology-final-cta,
   .data-final-cta {
     margin-top: var(--section-space-mobile);
+    padding: 3rem 1.35rem;
   }
 
   .profile-portrait {
     width: min(100%, 30rem);
   }
 
-  .profile-portrait .profile-placeholder__visual {
-    aspect-ratio: 4 / 5;
+  .profile-placeholder--psychology .profile-portrait__image {
+    left: 36%;
   }
 
-  .project-grid {
+  .service-grid,
+  .testimonial-grid,
+  .project-grid,
+  .principle-grid,
+  .modality-grid,
+  .formation-grid,
+  .metric-grid,
+  .hospital-path,
+  .spotlight-grid,
+  .research-grid,
+  .skill-grid,
+  .course-grid,
+  .education-band,
+  .health-panel,
+  .computing-band,
+  .speaking-panel {
     grid-template-columns: 1fr;
   }
 
+  .service-card,
+  .testimonial-card,
   .project-card,
   .project-card:nth-child(n + 3),
-  .project-card:last-child:nth-child(odd) {
+  .project-card:last-child:nth-child(odd),
+  .principle-card,
+  .modality-card,
+  .formation-card,
+  .research-card,
+  .course-card {
     grid-column: auto;
+    min-height: auto;
+  }
+
+  .role-row {
+    grid-template-columns: 2rem 1fr;
+    gap: 1rem;
+  }
+
+  .role-row p {
+    grid-column: 2;
+  }
+
+  .data-positioning {
+    padding: 2rem 1.35rem;
   }
 
   .data-positioning h2 {
     max-width: 100%;
-    font-size: clamp(2.4rem, 11.5vw, 3.75rem);
-    line-height: 1.06;
+    font-size: clamp(2.35rem, 10.5vw, 3.5rem);
+    line-height: 1.04;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience-hero__actions,
+  .experience-hero__actions .action-link {
+    width: 100%;
+  }
+
+  .profile-placeholder__caption {
+    gap: 0.65rem;
+    padding: 0.75rem 0.8rem !important;
+  }
+
+  .profile-placeholder__caption strong {
+    font-size: 0.78rem;
+  }
+
+  .profile-placeholder__caption span {
+    font-size: 0.64rem;
+  }
+
+  .tag-row,
+  .skill-list,
+  .speaking-topics {
+    gap: 0.45rem;
   }
 }

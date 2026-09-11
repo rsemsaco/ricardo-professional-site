@@ -1,10 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 
-export default function Reveal({ children, className = '', delay = 0 }) {
+export default function Reveal({ children, className = '', delay = 0, animate = false }) {
   const ref = useRef(null)
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(!animate)
 
   useEffect(() => {
+    if (!animate) {
+      setVisible(true)
+      return undefined
+    }
+
     const node = ref.current
     if (!node) return undefined
 
@@ -26,12 +31,12 @@ export default function Reveal({ children, className = '', delay = 0 }) {
 
     observer.observe(node)
     return () => observer.disconnect()
-  }, [])
+  }, [animate])
 
   return (
     <div
       ref={ref}
-      className={`reveal ${visible ? 'is-visible' : ''} ${className}`.trim()}
+      className={`reveal ${animate ? 'reveal--animated' : 'reveal--static'} ${visible ? 'is-visible' : ''} ${className}`.trim()}
       style={{ '--reveal-delay': `${delay}ms` }}
     >
       {children}

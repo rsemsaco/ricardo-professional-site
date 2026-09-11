@@ -17,7 +17,7 @@ export default function FoundationHero({
 }) {
   return (
     <section className={`experience-hero experience-hero--${mode}`} aria-labelledby={`${mode}-hero-title`}>
-      <Reveal className="experience-hero__content">
+      <Reveal animate className="experience-hero__content">
         <p className="eyebrow">{eyebrow}</p>
         <h1 id={`${mode}-hero-title`}>{title}</h1>
         <p className="experience-hero__description">{description}</p>
@@ -48,7 +48,7 @@ export default function FoundationHero({
         ) : null}
       </Reveal>
 
-      <Reveal className="experience-hero__media" delay={120}>
+      <Reveal animate className="experience-hero__media" delay={120}>
         <ProfilePlaceholder mode={mode} label={photoLabel} path={photoPath} id={photoId} />
       </Reveal>
     </section>
