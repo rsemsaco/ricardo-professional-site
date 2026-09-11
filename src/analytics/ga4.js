@@ -40,38 +40,12 @@ function storeConsent(value) {
   try {
     window.localStorage.setItem(CONSENT_KEY, value)
   } catch {
-    // Analytics continues with the in-memory state if storage is unavailable.
+    // Continue with in-memory consent state if localStorage is unavailable.
   }
 }
 
 function professionalAreaFromPath() {
   return window.location.pathname.includes('/dados') ? 'data' : 'psychology'
-}
-
-function debugModeEnabled() {
-  return new URLSearchParams(window.location.search).get('ga_debug') === '1'
-}
-
-function loadGa4() {
-  if (typeof window === 'undefined' || window.__rmGa4Loaded) return
-
-  const measurementId = siteConfig.analytics?.ga4MeasurementId
-  if (!measurementId) return
-
-  window.__rmGa4Loaded = true
-  ensureGtag()
-  window.gtag('js', new Date())
-  window.gtag('config', measurementId, {
-    allow_google_signals: false,
-    allow_ad_personalization_signals: false,
-    debug_mode: debugModeEnabled(),
-  })
-
-  const script = document.createElement('script')
-  script.async = true
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`
-  script.dataset.rmAnalytics = 'ga4'
-  document.head.appendChild(script)
 }
 
 export function getAnalyticsConsent() {
@@ -86,16 +60,13 @@ export function initializeAnalytics() {
   window.__rmGa4Initialized = true
   ensureGtag()
 
-  window.gtag('consent', 'default', {
-    analytics_storage: 'denied',
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-  })
-
   if (getAnalyticsConsent() === 'granted') {
-    window.gtag('consent', 'update', { analytics_storage: 'granted' })
-    loadGa4()
+    window.gtag('consent', 'update', {
+      analytics_storage: 'granted',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+    })
   }
 }
 
@@ -112,8 +83,6 @@ export function setAnalyticsConsent(value) {
     ad_user_data: 'denied',
     ad_personalization: 'denied',
   })
-
-  if (consent === 'granted') loadGa4()
 }
 
 export function openAnalyticsPreferences() {
