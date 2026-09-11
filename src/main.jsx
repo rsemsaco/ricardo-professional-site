@@ -11,6 +11,7 @@ import './styles/psychology.css'
 import './styles/data.css'
 import './styles/premium.css'
 import './styles/refinements.css'
+import './styles/analytics.css'
 
 initializeAnalytics()
 
