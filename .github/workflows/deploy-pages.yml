@@ -38,6 +38,12 @@ jobs:
         env:
           VITE_BASE_PATH: /
 
+      - name: Verify public SEO files
+        run: |
+          test -f dist/sitemap.xml
+          test -f dist/robots.txt
+          grep -q "https://www.ricardomaggessi.com/sitemap.xml" dist/robots.txt
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
         with:
