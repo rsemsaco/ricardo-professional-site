@@ -51,6 +51,11 @@ export const dataContent = {
       text: 'Liderança técnica de produto voltado a Riscos Psicossociais, com atuação em arquitetura, organização de dados, bancos vetoriais, IA, roadmap técnico e desenvolvimento de novas soluções.',
     },
     {
+      role: 'Residente em Tecnologia e Saúde Digital',
+      organization: 'USP · Samsung Ocean',
+      text: 'Formação prática voltada à inovação em saúde digital, integrando tecnologia, produto, dados e metodologias ágeis para o desenvolvimento de soluções aplicadas a problemas reais em saúde.',
+    },
+    {
       role: 'Professor / Educador',
       organization: 'Hospital do Coração — HCor',
       text: 'Curso de Gestão em Psicologia Hospitalar, com atuação no módulo de Inovação e Novas Tecnologias e experiência em atividades formativas em contexto hospitalar.',
@@ -91,11 +96,13 @@ export const dataContent = {
       tags: ['Automação', 'Psicologia', 'Dados'],
     },
     {
-      type: 'Automação em saúde',
-      title: 'Fluxo baseado na CIF',
-      kicker: 'Classificação Internacional de Funcionalidade',
-      text: 'Automação voltada a organizar informações e reduzir trabalho operacional em fluxos profissionais, sem substituir julgamento ou responsabilidade técnica.',
-      tags: ['CIF', 'Saúde', 'Fluxos'],
+      type: 'Saúde digital',
+      title: 'My Little CIF — MLCIF',
+      kicker: 'Plataforma inteligente para aplicação da CIF',
+      text: 'Plataforma digital voltada à aplicação inteligente da Classificação Internacional de Funcionalidade (CIF), estruturando avaliações, informações funcionais e recursos de apoio para tornar o uso da CIF mais organizado, acessível e aplicável à prática profissional.',
+      tags: ['CIF', 'Saúde Digital', 'IA', 'Produto'],
+      href: 'https://www.mylittlecif.com/',
+      cta: 'Conhecer o My Little CIF',
     },
   ],
   testimonials: [
