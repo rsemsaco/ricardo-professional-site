@@ -92,13 +92,14 @@
   background: linear-gradient(145deg, #081b2b, #102a43 58%, #172a3a);
 }
 
-/* Strong leftward crop for Psychology; Data remains centered. */
+/* Intentional portrait framing per experience. */
 .profile-placeholder--psychology .profile-portrait__image {
   left: 40%;
   object-position: 50% 46%;
 }
 
 .profile-placeholder--data .profile-portrait__image {
+  left: 37%;
   object-position: 50% 50%;
 }
 
@@ -126,16 +127,19 @@
 
 .data-positioning h2 {
   max-width: 20ch;
-  margin-bottom: 1.35rem;
+  margin: 0 auto 1.35rem;
   padding-bottom: 0.12em;
   font-size: clamp(2.35rem, 4.4vw, 4.65rem);
   line-height: 1.04;
   letter-spacing: -0.048em;
+  text-align: center;
   overflow: visible;
 }
 
-.data-positioning > p {
+.data-positioning > p:not(.eyebrow) {
   max-width: 64ch;
+  margin-inline: auto;
+  text-align: center;
 }
 
 .mini-flow {
@@ -159,6 +163,11 @@
 
 .project-card h3 {
   margin-top: 3.4rem;
+}
+
+.project-card .action-link {
+  margin-top: 1.35rem;
+  width: fit-content;
 }
 
 .testimonial-card {
@@ -278,6 +287,10 @@
     left: 36%;
   }
 
+  .profile-placeholder--data .profile-portrait__image {
+    left: 33%;
+  }
+
   .service-grid,
   .testimonial-grid,
   .project-grid,
@@ -328,6 +341,10 @@
     max-width: 100%;
     font-size: clamp(2.35rem, 10.5vw, 3.5rem);
     line-height: 1.04;
+  }
+
+  .project-card .action-link {
+    width: 100%;
   }
 }
 
