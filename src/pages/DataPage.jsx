@@ -73,6 +73,7 @@ export default function DataPage() {
                 <div className="project-card__meta"><span>{project.type}</span><span>{String(index + 1).padStart(2, '0')}</span></div>
                 <h3>{project.title}</h3><strong>{project.kicker}</strong><p>{project.text}</p>
                 <div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                {project.href ? <ActionLink href={project.href} variant="secondary">{project.cta || 'Conhecer projeto'}</ActionLink> : null}
               </Reveal>
             ))}
           </div>
